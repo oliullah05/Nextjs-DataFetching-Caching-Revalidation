@@ -1,11 +1,11 @@
-import getJoke from "@/utils/getJoke";
+import getJoke from "@/utils/getJokeAxios";
 
 
 const RandomJoke = async() => {
     const joke = await getJoke()
     return (
         <div className="mt-4">
-            {joke.value}
+            {joke.data.value}
         </div>
     );
 };
