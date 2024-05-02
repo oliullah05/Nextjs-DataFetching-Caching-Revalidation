@@ -3,7 +3,7 @@ import connectMongo from "@/dbConnect/connectMongo"
 import User from "@/models/user"
 import { revalidatePath } from "next/cache"
 
-export const addUser = async (formData) => {
+export const addUser = async (flag,formData) => {
 
     const name = formData.get("name")
     const email = formData.get("email")

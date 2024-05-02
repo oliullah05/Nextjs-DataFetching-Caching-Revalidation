@@ -4,9 +4,9 @@ import { addUser } from "@/Actions/user";
 
 export default function NewUserForm() {
     
-
+const addUserWithFlag = addUser.bind(null,"Pro")
     return (
-        <form action={addUser}>
+        <form action={addUserWithFlag}>
             <div>
                 <input type="text" name="name" placeholder="Name" />
             </div>
