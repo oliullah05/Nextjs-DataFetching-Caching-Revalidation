@@ -6,7 +6,8 @@ import { revalidatePath } from "next/cache"
 export const addUser = async (flag,formData) => {
 
     const name = formData.get("name")
-    const email = formData.get("email")
+    const email = formData.get("email");
+    
     const userData = {
         name, email
     }
