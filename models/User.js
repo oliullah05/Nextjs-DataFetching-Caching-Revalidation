@@ -1,23 +1,17 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
-const UsersSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        default: "Anonymous",
-        min: 2,
-        max: 100,
+const UsersSchema = new Schema({
+    name:{
+        type:String
     },
-    email: {
-        type: String,
-        match: [
-            /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-            "Please fill a valid email address",
-        ],
-        min: 2,
-        max: 100,
-    },
-});
+    email:{
+        type:String,
+        match:[/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address'],
+        min:5,
+        max:100
+    }
+})
 
-const User = mongoose.models.User || mongoose.model("User", UsersSchema);
+const User = mongoose.models.User || mongoose.model("User",UsersSchema)
 
 export default User;
