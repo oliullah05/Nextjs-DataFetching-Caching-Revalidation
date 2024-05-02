@@ -1,10 +1,12 @@
 import getPost from "@/api/getPost";
 import getPostComments from "@/api/getPostComments";
+import Comments from "@/app/components/Comments";
+import { Suspense } from "react";
 
 export default async function PostPage({ params: { postId } }) {
-    const postPromise =  getPost(postId);
-    const commentsPromise =  getPostComments(postId);
-const [posts,comments] =await Promise.all([postPromise,commentsPromise])
+    const postPromise = getPost(postId);
+    const commentsPromise = getPostComments(postId);
+    const post = await postPromise;
     return (
         <div className="px-8">
             <h2 className="text-slate-800">{post.title}</h2>
@@ -12,13 +14,10 @@ const [posts,comments] =await Promise.all([postPromise,commentsPromise])
             <div className="mt-8 border-t border-slate-500 p-4 rounded">
                 <h2 className="text-slate-800">Comments</h2>
                 <div className="mt-4">
-                    <ul className="text-slate-700">
-                        {comments.map((comment) => (
-                            <li className="mb-3" key={comment.id}>
-                                {comment.id}. {comment.body}
-                            </li>
-                        ))}
-                    </ul>
+                    <Suspense fallback={<div className="loading">Loading comments 2...........</div>}>
+                        <Comments commentsPromise={commentsPromise}></Comments>
+                    </Suspense>
+
                 </div>
             </div>
         </div>
