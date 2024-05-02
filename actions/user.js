@@ -2,7 +2,8 @@
 import connectMongo from "@/dbConnect/connectMongo"
 import User from "@/models/user"
 import wait from "@/utils/wait"
-import { revalidatePath } from "next/cache"
+import { revalidatePath,revalidateTag } from "next/cache"
+
 
 export const addUser = async (formData) => {
 
@@ -24,6 +25,8 @@ await wait(4000)
 
     // revalidate user
     revalidatePath("/")
+    revalidateTag()
+
 }
 catch(err){
     console.log(err);
